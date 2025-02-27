@@ -22,6 +22,7 @@ class GuestbookController extends Controller
      */
     public function store(SaveGuestbookEntryRequest $request)
     {
+        GuestbookEntry::create($request->validated());
         return back();
     }
 
@@ -30,6 +31,9 @@ class GuestbookController extends Controller
      */
     public function update(Request $request, GuestbookEntry $guestbook)
     {
+        $guestbook->update([
+            'approved_at' => now()
+        ]);
         return back();
     }
 
@@ -44,7 +48,7 @@ class GuestbookController extends Controller
 
     public function unapproved()
     {
-        $entries = GuestbookEntry::paginate(5);
+        $entries = GuestbookEntry::unapproved()->paginate(5);
         return view('guestbook.unapproved', compact('entries'));
     }
 }

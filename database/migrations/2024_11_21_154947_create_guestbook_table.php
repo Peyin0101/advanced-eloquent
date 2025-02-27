@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('guestbook', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
 
             $table->string('name');
             $table->text('message');
             $table->dateTime('approved_at')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
