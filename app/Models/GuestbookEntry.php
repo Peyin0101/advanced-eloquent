@@ -21,12 +21,12 @@ class GuestbookEntry extends Model
 
     protected $table = 'guestbook';
 
-    public function scopeApproved(Builder $query)
+    public function scopeApproved(Builder $query): Builder
     {
         return $query->whereNotNull('approved_at');
     }
 
-    public function scopeUnapproved(Builder $query)
+    public function scopeUnapproved(Builder $query): Builder
     {
         return $query->whereNull('approved_at');
     }
