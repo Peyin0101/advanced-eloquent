@@ -48,7 +48,7 @@ class GuestbookController extends Controller
 
     public function unapproved()
     {
-        $entries = GuestbookEntry::unapproved()->paginate(5);
+        $entries = GuestbookEntry::unapproved()->orderBy('id', 'desc')->paginate(5);
         return view('guestbook.unapproved', compact('entries'));
     }
 }
